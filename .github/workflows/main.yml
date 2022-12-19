@@ -3,7 +3,7 @@ name: Upload Resume Challenge
 on:
   push:
     branches:
-    - master
+    - main
 
 jobs:
   deploy:
