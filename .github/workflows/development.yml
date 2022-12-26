@@ -1,17 +1,17 @@
-name: Upload Resume (prod)
+name: Upload Resume (development)
 
 on:
   push:
     branches:
-      - main
+      - development
 
 permissions:
   id-token: write
 
 jobs:
-  write-prod:
+  write-dev:
     runs-on: ubuntu-latest
-    environment: Production
+    environment: Development
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -20,8 +20,8 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-region: us-east-1
-          role-to-assume: ${{ secrets.PROD_DEPLOY_ROLE }}
+          role-to-assume: ${{ secrets.DEV_DEPLOY_ROLE }}
           role-session-name: OIDCSession
 
-      - run: aws s3 sync ./public/ s3://resume.chucknemeth.com --delete
+      - run: aws s3 sync ./public/ s3://dev.resume.chucknemeth.com --delete
         shell: bash
